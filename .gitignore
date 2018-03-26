@@ -1,0 +1,4 @@
+backend/configuration/env/config
+.idea
+.vscode
+node_modules

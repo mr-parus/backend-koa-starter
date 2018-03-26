@@ -1,0 +1,9 @@
+prettier-ignore
+#NODE_ENV {production/development}
+NODE_ENV=development
+
+REDIS_PORT=6379
+REDIS_HOST=127.0.0.1
+
+MONGO_PATH=mongodb://username:password@localhost:27017
+MONGO_DATABASE_NAME=db_name

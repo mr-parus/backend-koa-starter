@@ -1,0 +1,17 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-underscore-dangle": "off",
+    "comma-dangle": ["error", "never"],
+    "one-var": "off",
+    "linebreak-style": ["error", "unix"],
+    "no-console": "error",
+    "semi": ["error", "always"]
+  },
+  "plugins": ["prettier"]
+}
