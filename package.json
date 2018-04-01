@@ -15,9 +15,11 @@
   },
   "config": {
     "commit-message-validator": {
-      "pattern": ["merge", "[(.*-|#)[0-9]+:[A-Z]{3,}].+"],
-      "errorMessage":
-        "Aborting commit...\nPlease ensure your commit message meets the standard requirement:\n'[#StoryID:CommitType] Commit Message"
+      "pattern": [
+        "merge",
+        "[(.*-|#)[0-9]+:[A-Z]{3,}].+"
+      ],
+      "errorMessage": "Aborting commit...\nPlease ensure your commit message meets the standard requirement:\n'[#StoryID:CommitType] Commit Message"
     }
   },
   "dependencies": {
@@ -55,8 +57,16 @@
     "sort-package-json": "^1.11.0"
   },
   "lint-staged": {
-    "*.json": ["prettier --write --loglevel error", "git add"],
-    "*.js": ["npm run lint --silent"],
-    "package.json": ["sort-package-json", "npm dedupe"]
+    "*.json": [
+      "prettier --write --loglevel error"
+    ],
+    "*.js": [
+      "npm run lint --silent"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "npm dedupe"
+    ],
+    "*": "git add"
   }
 }
