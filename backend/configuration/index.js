@@ -1,5 +1,5 @@
 const config = require('./configs');
-const env = require('dotenv-save');
+const env = require('dotenv-safe');
 
 exports.init = () =>
   env.config({
