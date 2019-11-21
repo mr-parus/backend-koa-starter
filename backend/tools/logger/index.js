@@ -1,8 +1,7 @@
 const winston = require('winston'),
-  configs = require('../configuration');
+  { DEVELOPMENT, PROJECT_ROOT, logger } = require('../../configs');
 
-const projectRoot = require('path').dirname(require.main.filename),
-  DEVELOPMENT = configs.get('NODE_ENV') === 'development',
+const projectRoot = PROJECT_ROOT,
   getConsoleTransport = label =>
     new winston.transports.Console({
       name: 'console',
@@ -10,16 +9,20 @@ const projectRoot = require('path').dirname(require.main.filename),
       colorize: 'all',
       label
     }),
-  getFileTransports = function* getFileTransports() {
-    yield new winston.transports.File({
-      name: 'error',
-      level: 'error',
-      filename: `${projectRoot}/logs/error.log`
-    });
-    if (configs.get('SERVER_LOG_INFO')) {
+  getFileTransports = function* getFileTransports(label) {
+    if (logger.prod.LOG_ERROR) {
+      yield new winston.transports.File({
+        name: 'error',
+        level: 'error',
+        label,
+        filename: `${projectRoot}/logs/error.log`
+      });
+    }
+    if (logger.prod.LOG_INFO) {
       yield new winston.transports.File({
         name: 'info',
         level: 'info',
+        label,
         filename: `${projectRoot}/logs/info.log`
       });
     }
@@ -39,6 +42,6 @@ module.exports = module => {
       warn: 'yellow',
       info: 'cyan'
     },
-    transports: DEVELOPMENT ? [getConsoleTransport(label)] : [...getFileTransports()]
+    transports: DEVELOPMENT ? [getConsoleTransport(label)] : [...getFileTransports(label)]
   });
 };

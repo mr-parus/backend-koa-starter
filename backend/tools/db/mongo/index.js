@@ -1,10 +1,9 @@
 const mongoose = require('mongoose'),
   util = require('util'),
-  configs = require('../../../configuration/index');
+  { DEVELOPMENT, mongo: mongoConfigs } = require('../../../configs');
 
-const log = require('../../logger')(module),
-  mongoURI = `${configs.get('MONGO_PATH')}/${configs.get('MONGO_DATABASE_NAME')}`,
-  DEVELOPMENT = configs.get('NODE_ENV') === 'development';
+const log = require('../../logger/index')(module),
+  mongoURI = `${mongoConfigs.PATH}/${mongoConfigs.DATABASE}`;
 
 mongoose.Promise = global.Promise;
 
@@ -16,7 +15,7 @@ if (DEVELOPMENT) {
 
 exports.connect = () =>
   mongoose
-    .connect(mongoURI)
+    .connect(mongoURI, { autoIndex: true })
     .then(() => log.info(`Connected to MongoDB: ${mongoURI}`))
     .catch(err => {
       log.error(`Unable to connect to MongoDB: ${mongoURI}`);

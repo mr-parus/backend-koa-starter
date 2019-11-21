@@ -1,6 +1,5 @@
 const mongoose = require('mongoose'),
-  log = require('../../services/logger')(module),
-  { apiModelTransform } = require('../../utils'),
+  log = require('../../tools/logger/index')(module),
   { Schema } = require('mongoose');
 
 const NODE_TYPES = ['req', 'js', 'ifr'];
@@ -55,7 +54,16 @@ Node.pre('remove', next => {
 
 Node.set('toJSON', {
   virtuals: false,
-  transform: apiModelTransform
+  transform: (doc, ret) =>
+    Object.keys(ret)
+      .filter(key => !['__v', '_id'].includes(key))
+      .reduce(
+        (obj, key) =>
+          Object.assign(obj, {
+            [key]: ret[key]
+          }),
+        { id: ret._id.toString() }
+      )
 });
 
 module.exports = mongoose.model('nodes', Node);

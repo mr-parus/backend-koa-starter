@@ -6,6 +6,7 @@
   "extends": ["airbnb", "prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "no-plusplus":"off",
     "no-underscore-dangle": "off",
     "comma-dangle": ["error", "never"],
     "one-var": "off",

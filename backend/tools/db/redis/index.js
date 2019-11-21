@@ -1,6 +1,6 @@
 const redis = require('redis'),
-  configs = require('../../../configuration/index'),
-  log = require('../../logger')(module),
+  configs = require('../../../configs'),
+  log = require('../../logger/index')(module),
   bluebird = require('bluebird');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
