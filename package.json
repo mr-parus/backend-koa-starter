@@ -27,7 +27,7 @@
     "bluebird": "^3.5.1",
     "command-line-args": "^5.0.2",
     "http-custom-errors": "^8.0.0",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
     "kcors": "^2.2.1",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
